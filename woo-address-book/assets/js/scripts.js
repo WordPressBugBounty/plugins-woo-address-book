@@ -13,30 +13,53 @@ var woo_address_book_app = {
 		this.checkout();
 	},
 
+	initialize_address_book_selects: function () {
+		var $ = this.jQuery;
+
+		$( 'select#shipping_address_book:visible, select#billing_address_book:visible' ).each(
+			function () {
+				var $select = $( this );
+
+				// Skip already-enhanced or externally-managed selects.
+				if ( $select.hasClass( 'select2-hidden-accessible' ) ) {
+					return;
+				}
+				// check for aria-hidden.
+				if ( $select.attr( 'aria-hidden' ) === 'true' ) {
+					return;
+				}
+				if ( $.fn.selectize && $select.hasClass( 'selectized' ) && $select[0] && $select[0].selectize ) {
+					return;
+				}
+
+				if ( $.fn.selectWoo ) {
+					$select.selectWoo();
+				} else if ( $.fn.select2 ) {
+					$select.select2();
+				}
+			}
+		);
+	},
+
 	checkout: function () {
 		var $              = this.jQuery;
-		var load_selectWoo = true;
-		var address_book   = $( 'select#shipping_address_book:visible, select#billing_address_book:visible' );
-		if ( ! address_book.length ) {
-			address_book   = $( 'input[name="shipping_address_book"]:checked, input[name="billing_address_book"]:checked' );
-			load_selectWoo = false;
-		}
 
-		// Check for Selectize being used.
-		if ( $.fn.selectize ) {
-			if ( address_book.hasClass( "selectized" ) && address_book[0] && address_book[0].selectize ) {
-				load_selectWoo = false;
-			}
-		}
+		this.initialize_address_book_selects();
 
-		// SelectWoo / Select2 Enhancement if it exists.
-		if ( load_selectWoo ) {
-			if ( $.fn.selectWoo ) {
-				address_book.selectWoo();
-			} else if ( $.fn.select2 ) {
-				address_book.select2();
+		$( document.body ).on(
+			'updated_checkout',
+			function () {
+				woo_address_book_app.initialize_address_book_selects();
 			}
-		}
+		);
+
+		$( document ).on(
+			'change',
+			'#ship-to-different-address input, #ship-to-different-address-checkbox',
+			function () {
+				woo_address_book_app.initialize_address_book_selects();
+			}
+		);
 
 		// BlockUI settings.
 		$.blockUI.defaults.message                    = null;

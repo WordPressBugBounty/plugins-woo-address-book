@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Address Book for WooCommerce
  * Description: Gives your customers the option to store multiple shipping and/or billing addresses and retrieve them on checkout.
- * Version: 3.1.0
+ * Version: 3.1.1
  * Author: CrossPeak
  * Author URI: https://www.crosspeaksoftware.com/
  * License: GPL2
@@ -76,5 +76,6 @@ if ( ! function_exists( '\CrossPeakSoftware\WooCommerce\AddressBook\get_address_
 	require __DIR__ . '/includes/subscriptions.php';
 	require __DIR__ . '/includes/api.php';
 	require __DIR__ . '/includes/settings.php';
+	require __DIR__ . '/includes/stripe.php';
 	require __DIR__ . '/deprecations/class-wc-address-book.php';
 }

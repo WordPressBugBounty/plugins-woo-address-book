@@ -1,17 +1,19 @@
-=== WooCommerce Address Book ===
+=== Address Book for WooCommerce ===
 Contributors: crosspeak, hallme, doomwaxer, timbhowe, matt-h, hinyka
 Tags: WooCommerce, address book, multiple addresses, address
 Donate link: https://www.crosspeaksoftware.com/process-payment/
 Requires at least: 4.6
 Tested up to: 6.9.1
 Requires PHP: 7.4
-Stable tag: 3.1.0
+Stable tag: 3.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 Gives your customers the option to store multiple billing and shipping addresses and retrieve them on checkout.
 
 == Description ==
+
+**Notice** - This plugin is does not currently work with the WooCommerce Block Checkout. It currently only supports the Classic WooCommerce checkout. We hope to find a way to integrate with the Block Checkout in the future.
 
 Gives your customers the option to store multiple billing and shipping addresses and retrieve them on checkout. Addresses can be updated and modified quickly and easily in /my-account/, or saved as part of the checkout process.
 
@@ -37,7 +39,7 @@ View the source on [GitHub](https://github.com/crosspeaksoftware/woo-address-boo
 
 = PRO =
 
-The WooCommerce Address Book plugin is also available in a professional version which includes more functionality. Address Book Pro for WooCommerce features:
+The Address Book plugin is also available in a professional version which includes more functionality. Address Book Pro for WooCommerce features:
 
 * Backoffice support
   * When adding orders through the Admin you can select from a customer's address book.
@@ -64,7 +66,7 @@ No, this plugin only allows for the storage of multiple shipping addresses. If a
 Most standard custom fields do work with the Address Book. However, if you have custom fields added by a plugin which are updated by javascript then the Address Book plugin will not always know how to handle the data. If you are running into an issue please post an issue in the [support forum](https://wordpress.org/support/plugin/woo-address-book/) or on [github](https://github.com/crosspeaksoftware/woo-address-book/issues) with what plugin or code you are using and as much details as you can. We will determine if the Address Book plugin is able to provide support for the plugin or if a custom solution would need to be developed for your use case.
 
 = How can I add custom fields to my billing/shipping address? =
-WooCommerce Address Book uses the standard WooCommerce address functions so any method to modify the address fields will still work.
+Address Book for WooCommerce uses the standard WooCommerce address functions so any method to modify the address fields will still work.
 We have tested that using the standard filters works correctly:
 * [https://docs.woocommerce.com/document/tutorial-customising-checkout-fields-using-actions-and-filters/](https://docs.woocommerce.com/document/tutorial-customising-checkout-fields-using-actions-and-filters/)
 We have also tested this plugin by WooCommerce:
@@ -105,6 +107,11 @@ New data structure and templates are used this will **break custom modifications
 
 == Changelog ==
 
+= 3.1.1 =
+* Fix issue with Stripe when checking out with a secondary billing address and the default billing address was not valid.
+* Adjust WooCommerce Checkout priority so the select field works with more checkout editors.
+* Rework loading selectWoo so it better handles various checkout conditions.
+
 = 3.1.0 =
 * **Potential breaking change** for updating from 2.x versions.
   * If you are using this plugin as a user, then nothing should break with this change. All data from older versions of the plugin is updated automatically. You may want to review the plugin settings to make sure that it is setup as you would like.
@@ -118,6 +125,13 @@ New data structure and templates are used this will **break custom modifications
 * Feature: Add REST API endpoint to get customer addresses.
 * Feature: Add Import/Export feature of addresses. This is disabled by default so you will need to turn it on in the settings.
 * Change: Settings have been moved from WooCommerce -> Settings -> General to their own settings section under Address Book.
+
+= 3.0.2 =
+ * Extra sanitization of data.
+ * More validation of imported csvs.
+
+= 3.0.1 =
+ * Fix: Fix potential temporary PHP fatal error in 3.0.0
 
 = 3.0.0 =
 * Beta versions. **Potential breaking change**

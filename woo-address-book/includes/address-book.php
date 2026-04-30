@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-const PLUGIN_VERSION = '3.1.0';
+const PLUGIN_VERSION = '3.1.1';
 
 /**
  * Adds a link/button to the my account page under the addresses for adding additional addresses to their account.
@@ -245,7 +245,7 @@ function checkout_address_select_field( array $fields ) {
 
 	return $fields;
 }
-add_filter( 'woocommerce_checkout_fields', __NAMESPACE__ . '\checkout_address_select_field', 10000, 1 );
+add_filter( 'woocommerce_checkout_fields', __NAMESPACE__ . '\checkout_address_select_field', 100000, 1 );
 
 /**
  * Adds the address book select to the checkout page.
